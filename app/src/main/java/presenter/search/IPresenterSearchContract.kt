@@ -1,4 +1,7 @@
 package presenter.search
 
-interface IPresenterSearchContract {
+import presenter.IPresenterContract
+
+internal interface IPresenterSearchContract: IPresenterContract {
+    fun searchGitHub(searchQuery: String)
 }
