@@ -1,0 +1,4 @@
+package presenter
+
+interface PresenterContract {
+}

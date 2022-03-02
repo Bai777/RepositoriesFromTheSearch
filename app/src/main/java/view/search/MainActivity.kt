@@ -1,7 +1,8 @@
-package com.example.repositoriesfromthesearch
+package view.search
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.repositoriesfromthesearch.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
