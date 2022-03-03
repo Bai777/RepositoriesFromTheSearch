@@ -1,4 +1,7 @@
 package view.details
 
-interface IViewDetailsContract {
+import view.IViewContract
+
+internal interface IViewDetailsContract: IViewContract {
+    fun setCount(count: Int)
 }
