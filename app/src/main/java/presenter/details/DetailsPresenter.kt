@@ -5,7 +5,8 @@ import view.details.IViewDetailsContract
 internal class DetailsPresenter internal constructor(
     private val viewContract: IViewDetailsContract,
     private var count: Int = 0
-): IPresenterDetailsContract{
+): IPresenterDetailsContract {
+
 
     override fun setCounter(count: Int) {
         this.count = count

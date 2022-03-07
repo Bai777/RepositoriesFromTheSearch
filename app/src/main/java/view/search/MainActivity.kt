@@ -21,7 +21,7 @@ import view.details.DetailsActivity
 class MainActivity : AppCompatActivity(), IViewSearchContract {
 
     private val adapter = SearchResultAdapter()
-    private val presenter: IPresenterSearchContract = SearchPresenter(this, createRepository())
+    private val presenter: IPresenterSearchContract = SearchPresenter(createRepository())
     private var totalCount: Int = 0
     lateinit var binding: ActivityMainBinding
 
@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity(), IViewSearchContract {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUI()
+    }
+    override fun onResume() {
+        super.onResume()
+        presenter.onAttach(this)
     }
 
     private fun setUI() {
@@ -46,7 +50,7 @@ class MainActivity : AppCompatActivity(), IViewSearchContract {
     }
 
     private fun setQueryListener() {
-        searchEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+        binding.searchEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val query = searchEditText.text.toString()
                 if (query.isNotBlank()) {
