@@ -2,14 +2,17 @@ package com.example.repositoriesfromthesearch
 
 import android.content.Context
 import android.os.Build
-import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.ViewAssertion
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import junit.framework.TestCase
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,14 +35,14 @@ class DetailsActivityEspressoTest {
     @Test
     fun activity_AssertNotNull() {
         scenario.onActivity {
-            assertNotNull(it)
+            TestCase.assertNotNull(it)
         }
     }
 
     // активити в нужном нам состоянии
     @Test
     fun activity_IsResumed() {
-        assertEquals(Lifecycle.State.RESUMED, scenario.state)
+        TestCase.assertEquals(Lifecycle.State.RESUMED, scenario.state)
     }
 
     // проверим что TextView существует
@@ -47,25 +50,20 @@ class DetailsActivityEspressoTest {
     fun activityTextView_NotNull() {
         scenario.onActivity {
             val totalCountTextView = it.binding.totalCountTextView
-            assertNotNull(totalCountTextView)
+            TestCase.assertNotNull(totalCountTextView)
         }
     }
 
     // текстовое поле отображает ожидаемую информацию и видно на экране
     @Test
     fun activityTextView_HasText() {
-        scenario.onActivity {
-            val totalCountTextView = it.binding.totalCountTextView
-            assertEquals("Number of results: 0", totalCountTextView.text)
-        }
+        val assertion: ViewAssertion = matches(withText("Number of results: 0"))
+        onView(withId(R.id.totalCountTextView)).check(assertion)
     }
 
     @Test
     fun activityTextView_IsVisible() {
-        scenario.onActivity {
-            val totalCountTextView = it.binding.totalCountTextView
-            assertEquals(View.VISIBLE, totalCountTextView.visibility)
-        }
+        onView(withId(R.id.totalCountTextView)).check(matches(isDisplayed()))
     }
 
     // проверим что ButtonDecrement существует
@@ -73,7 +71,7 @@ class DetailsActivityEspressoTest {
     fun activityButtonDecrement_NotNull() {
         scenario.onActivity {
             val decrementButton = it.binding.decrementButton
-            assertNotNull(decrementButton)
+            TestCase.assertNotNull(decrementButton)
         }
     }
 
@@ -82,57 +80,47 @@ class DetailsActivityEspressoTest {
     fun activityButtonIncrement_NotNull() {
         scenario.onActivity {
             val incrementButton = it.binding.incrementButton
-            assertNotNull(incrementButton)
+            TestCase.assertNotNull(incrementButton)
         }
     }
 
     @Test
     fun activityButtons_AreVisible() {
-        scenario.onActivity {
-            val decrementButton = it.binding.decrementButton
-            assertEquals(View.VISIBLE, decrementButton.visibility)
+        onView(withId(R.id.decrementButton)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
 
-            val incrementButton = it.binding.incrementButton
-            assertEquals(View.VISIBLE, incrementButton.visibility)
-        }
+        onView(withId(R.id.incrementButton)).check(matches(withEffectiveVisibility(
+            Visibility.VISIBLE)))
     }
 
     // проверим, как нажатие на кнопку (+) изменяет значение в TextView
     @Test
     fun activityButtonIncrement_IsWorking() {
-        scenario.onActivity {
-            val incrementButton = it.binding.incrementButton
-            val totalCountTextView = it.binding.totalCountTextView
-            incrementButton.performClick()
-            assertEquals("Number of results: 1", totalCountTextView.text)
-        }
+        val assertion: ViewAssertion = matches(withText("Number of results: 1"))
+        onView(withId(R.id.incrementButton)).perform(click())
+        onView(withId(R.id.totalCountTextView)).check(assertion)
     }
 
     // проверим, как нажатие на кнопку (-) изменяет значение в TextView
     @Test
     fun activityButtonDecrement_IsWorking() {
-        scenario.onActivity {
-            val decrementButton = it.binding.decrementButton
-            val totalCountTextView = it.binding.totalCountTextView
-            decrementButton.performClick()
-            assertEquals("Number of results: -1", totalCountTextView.text)
-        }
+        val assertion: ViewAssertion = matches(withText("Number of results: -1"))
+        onView(withId(R.id.decrementButton)).perform(click())
+        onView(withId(R.id.totalCountTextView)).check(assertion)
     }
 
     // создаём статический метод getIntent().
     // Убедимся, что он создается корректно и содержит правильные данные
     @Test
     fun activityCreateIntent_NotNull() {
-        val context: Context = ApplicationProvider.getApplicationContext()
         val intent = DetailsActivity.getIntent(context, 0)
-        assertNotNull(intent)
+        TestCase.assertNotNull(intent)
     }
 
     @Test
     fun activityCreateIntent_HasExtras() {
         val intent = DetailsActivity.getIntent(context, 0)
         val bundle = intent.extras
-        assertNotNull(bundle)
+        TestCase.assertNotNull(bundle)
     }
 
     @Test
@@ -140,7 +128,7 @@ class DetailsActivityEspressoTest {
         val count = 42
         val intent = DetailsActivity.getIntent(context, count)
         val bundle = intent.extras
-        assertEquals(count, bundle?.getInt(DetailsActivity.TOTAL_COUNT_EXTRA, 0))
+        TestCase.assertEquals(count, bundle?.getInt(DetailsActivity.TOTAL_COUNT_EXTRA, 0))
     }
 
     @After
