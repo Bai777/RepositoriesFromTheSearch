@@ -17,6 +17,7 @@ import repository.GitHubRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import view.details.DetailsActivity
+import java.util.*
 
 class MainActivity : AppCompatActivity(), IViewSearchContract {
 
@@ -81,6 +82,10 @@ class MainActivity : AppCompatActivity(), IViewSearchContract {
     }
 
     override fun displaySearchResults(searchResults: List<SearchResult>, totalCount: Int) {
+        with(totalCountTextView){
+            visibility = View.VISIBLE
+            text = String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
+        }
         this.totalCount = totalCount
         adapter.updateResults(searchResults)
     }
