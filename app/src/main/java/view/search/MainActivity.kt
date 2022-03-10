@@ -6,12 +6,15 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.BuildConfig
 import com.example.repositoriesfromthesearch.R
 import com.example.repositoriesfromthesearch.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import model.SearchResult
+import presenter.IRepositoryContract
 import presenter.search.IPresenterSearchContract
 import presenter.search.SearchPresenter
+import repository.FakeGitHubRepository
 import repository.GitHubApi
 import repository.GitHubRepository
 import retrofit2.Retrofit
@@ -32,13 +35,14 @@ class MainActivity : AppCompatActivity(), IViewSearchContract {
         setContentView(binding.root)
         setUI()
     }
+
     override fun onResume() {
         super.onResume()
         presenter.onAttach(this)
     }
 
     private fun setUI() {
-        binding.toDetailsActivityButton.setOnClickListener{
+        binding.toDetailsActivityButton.setOnClickListener {
             startActivity(DetailsActivity.getIntent(this, totalCount))
         }
         setQueryListener()
@@ -70,8 +74,12 @@ class MainActivity : AppCompatActivity(), IViewSearchContract {
         })
     }
 
-    private fun createRepository(): GitHubRepository {
-        return GitHubRepository(createRetrofit().create(GitHubApi::class.java))
+    private fun createRepository(): IRepositoryContract {
+        return if (BuildConfig.BUILD_TYPE == FAKE) {
+            FakeGitHubRepository()
+        } else {
+            GitHubRepository(createRetrofit().create(GitHubApi::class.java))
+        }
     }
 
     private fun createRetrofit(): Retrofit {
@@ -82,7 +90,7 @@ class MainActivity : AppCompatActivity(), IViewSearchContract {
     }
 
     override fun displaySearchResults(searchResults: List<SearchResult>, totalCount: Int) {
-        with(totalCountTextView){
+        with(totalCountTextView) {
             visibility = View.VISIBLE
             text = String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
         }
@@ -105,7 +113,9 @@ class MainActivity : AppCompatActivity(), IViewSearchContract {
             progressBar.visibility = View.GONE
         }
     }
+
     companion object {
         const val BASE_URL = "https://api.github.com"
+        const val FAKE = "FAKE"
     }
 }

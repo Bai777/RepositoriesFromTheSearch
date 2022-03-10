@@ -8,17 +8,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
+import org.hamcrest.Matcher
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
@@ -26,15 +26,10 @@ import view.search.MainActivity
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.O_MR1])
-class MainActivityTest {
+class MainActivityEspressoTest {
     private lateinit var scenario: ActivityScenario<MainActivity>
     private lateinit var context: Context
 
-    @Rule
-    @JvmField
-    var activityRule = ActivityTestRule<MainActivity>(
-        MainActivity::class.java
-    )
 
     @Before
     fun setup() {
@@ -52,6 +47,27 @@ class MainActivityTest {
     @Test
     fun activity_IsResumed() {
         assertEquals(Lifecycle.State.RESUMED, scenario.state)
+    }
+
+    @Test
+    fun activitySearch_IsWorking(){
+        onView(withId(R.id.searchEditText)).perform(click())
+        onView(withId(R.id.searchEditText)).perform(replaceText("algol"), closeSoftKeyboard())
+        onView(withId(R.id.searchEditText)).perform(pressImeActionButton())
+        onView(isRoot()).perform(delay())
+        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 2283")))
+    }
+
+    private fun delay(): ViewAction? {
+        return object: ViewAction{
+            override fun getConstraints(): Matcher<View> = isRoot()
+
+            override fun getDescription(): String= "wait for $2 seconds"
+
+            override fun perform(uiController: UiController?, view: View?) {
+                uiController?.loopMainThreadForAtLeast(2000)
+            }
+        }
     }
 
     @Test

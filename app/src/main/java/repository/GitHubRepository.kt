@@ -1,14 +1,15 @@
 package repository
 
 import model.SearchResponse
+import presenter.IRepositoryContract
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-internal class GitHubRepository(private val gitHubApi: GitHubApi) {
+internal class GitHubRepository(private val gitHubApi: GitHubApi): IRepositoryContract {
     fun searchGithub(
         query: String,
-        callback: GitHubRepositoryCallback
+        callback: RepositoryCallback
     ) {
         val call = gitHubApi.searchGithub(query)
         call?.enqueue(object : Callback<SearchResponse?> {
@@ -29,9 +30,7 @@ internal class GitHubRepository(private val gitHubApi: GitHubApi) {
         })
     }
 
-    interface GitHubRepositoryCallback {
-        fun handleGitHubResponse(response: Response<SearchResponse?>?)
-        fun handleGitHubError()
+    override fun searchGitHub(query: String, callback: RepositoryCallback) {
+        callback.handleGitHubResponse(Response.success(SearchResponse(42, listOf())))
     }
-
 }
