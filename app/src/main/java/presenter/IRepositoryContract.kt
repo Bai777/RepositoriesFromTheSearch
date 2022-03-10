@@ -3,7 +3,7 @@ package presenter
 import repository.RepositoryCallback
 
 internal interface IRepositoryContract {
-    fun searchGitHub(
+    fun searchGithub(
         query: String,
         callback: RepositoryCallback
     )

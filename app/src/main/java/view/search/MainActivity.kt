@@ -10,6 +10,7 @@ import androidx.viewbinding.BuildConfig
 import com.example.repositoriesfromthesearch.R
 import com.example.repositoriesfromthesearch.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.details_activity.*
 import model.SearchResult
 import presenter.IRepositoryContract
 import presenter.search.IPresenterSearchContract
@@ -89,8 +90,11 @@ class MainActivity : AppCompatActivity(), IViewSearchContract {
             .build()
     }
 
-    override fun displaySearchResults(searchResults: List<SearchResult>, totalCount: Int) {
-        with(totalCountTextView) {
+    override fun displaySearchResults(
+        searchResults: List<SearchResult>,
+        totalCount: Int,
+    ) {
+        with(binding.totalCountTextView) {
             visibility = View.VISIBLE
             text = String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
         }

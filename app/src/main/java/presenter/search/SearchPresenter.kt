@@ -2,7 +2,6 @@ package presenter.search
 
 import model.SearchResponse
 import presenter.IRepositoryContract
-import repository.GitHubRepository
 import repository.RepositoryCallback
 import retrofit2.Response
 import view.search.IViewSearchContract
@@ -16,7 +15,7 @@ internal class SearchPresenter internal constructor(
 
     override fun searchGitHub(searchQuery: String) {
     viewContract?.displayLoading(true)
-    repository.searchGitHub(searchQuery, this)
+    repository.searchGithub(searchQuery, this)
     }
 
     override fun onAttach(view: IViewSearchContract) {
