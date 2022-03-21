@@ -10,7 +10,6 @@ import androidx.viewbinding.BuildConfig
 import com.example.repositoriesfromthesearch.R
 import com.example.repositoriesfromthesearch.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.details_activity.*
 import model.SearchResult
 import presenter.IRepositoryContract
 import presenter.search.IPresenterSearchContract
@@ -74,6 +73,7 @@ class MainActivity : AppCompatActivity(), IViewSearchContract {
             false
         })
     }
+
 
     private fun createRepository(): IRepositoryContract {
         return if (BuildConfig.BUILD_TYPE == FAKE) {
