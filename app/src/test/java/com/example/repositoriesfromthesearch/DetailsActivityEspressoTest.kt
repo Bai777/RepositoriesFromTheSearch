@@ -57,8 +57,7 @@ class DetailsActivityEspressoTest {
     // текстовое поле отображает ожидаемую информацию и видно на экране
     @Test
     fun activityTextView_HasText() {
-        val assertion: ViewAssertion = matches(withText("Number of results: 0"))
-        onView(withId(R.id.totalCountTextView)).check(assertion)
+        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 0")))
     }
 
     @Test
@@ -95,17 +94,15 @@ class DetailsActivityEspressoTest {
     // проверим, как нажатие на кнопку (+) изменяет значение в TextView
     @Test
     fun activityButtonIncrement_IsWorking() {
-        val assertion: ViewAssertion = matches(withText("Number of results: 1"))
         onView(withId(R.id.incrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextView)).check(assertion)
+        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 1")))
     }
 
     // проверим, как нажатие на кнопку (-) изменяет значение в TextView
     @Test
     fun activityButtonDecrement_IsWorking() {
-        val assertion: ViewAssertion = matches(withText("Number of results: -1"))
         onView(withId(R.id.decrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextView)).check(assertion)
+        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: -1")))
     }
 
     // создаём статический метод getIntent().
