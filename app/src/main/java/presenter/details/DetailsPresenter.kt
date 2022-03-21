@@ -7,7 +7,6 @@ internal class DetailsPresenter internal constructor(
     private var count: Int = 0
 ): IPresenterDetailsContract {
 
-
     override fun setCounter(count: Int) {
         this.count = count
     }
