@@ -51,7 +51,7 @@ class MainActivityEspressoTest {
 
     @Test
     fun activitySearch_IsWorking(){
-        onView(withId(R.id.searchEditText)).perform(click())
+        onView(withId(R.id.toSearchButton)).perform(click())
         onView(withId(R.id.searchEditText)).perform(replaceText("algol"), closeSoftKeyboard())
         onView(withId(R.id.searchEditText)).perform(pressImeActionButton())
         if(BuildConfig.BUILD_TYPE == MainActivity.FAKE) {
