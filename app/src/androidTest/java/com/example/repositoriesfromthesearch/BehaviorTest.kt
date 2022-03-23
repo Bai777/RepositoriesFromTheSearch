@@ -3,7 +3,7 @@ package com.example.repositoriesfromthesearch
 import android.content.Context
 import android.content.Intent
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -47,7 +47,7 @@ class BehaviorTest {
     fun test_SearchIsPositive(){
         val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
         editText.text = "UiAutomator"
-        Espresso.onView(ViewMatchers.withId(R.id.searchEditText))
+        onView(ViewMatchers.withId(R.id.searchEditText))
             .perform(ViewActions.pressImeActionButton())
         val changedText = uiDevice.wait(Until.findObject(By.res(packageName, "totalCountTextView")), TIMEOUT)
         assertEquals(changedText.text.toString(), "Number of results: 700")
