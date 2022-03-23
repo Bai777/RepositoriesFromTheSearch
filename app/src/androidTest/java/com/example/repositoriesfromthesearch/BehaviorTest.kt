@@ -54,9 +54,16 @@ class BehaviorTest {
     fun test_OpenDetailsScreen(){
         val toDetails = uiDevice.findObject(By.res(packageName, "toDetailsActivityButton"))
         toDetails.click()
+    }
 
+    @Test
+    fun test_ExamEqualsReturnResultDetailsScreen(){
+        val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
+        editText.text = "algol"
+        val toSearch = uiDevice.findObject(By.res(packageName, "toSearchButton"))
+        toSearch.click()
         val changedText = uiDevice.wait(Until.findObject(By.res(packageName, "totalCountTextView")), TIMEOUT)
-        assertEquals(changedText.text, "Number of results: 0")
+        assertEquals(changedText.text, "Number of results: 2951")
     }
     companion object{
         private const val TIMEOUT = 5000L
