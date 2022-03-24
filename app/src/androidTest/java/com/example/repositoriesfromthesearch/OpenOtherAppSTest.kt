@@ -15,15 +15,13 @@ import org.junit.runner.RunWith
 @SdkSuppress(minSdkVersion = 18)
 class OpenOtherAppSTest {
 
-    private val uiDevice: UiDevice = UiDevice.getInstance(getInstrumentation())
-
     @Test
     fun test_OpenSettings(){
         uiDevice.pressHome()
         uiDevice.swipe(500, 1500, 500, 0, 5)
-        val appViews = UiScrollable(UiSelector().scrollable(true))
+        val appViews = UiScrollable(UiSelector().scrollable(false))
         // горизонтальная прокрутка (по умолчанию она вертикальная)
-        appViews.setAsHorizontalList()
+//        appViews.setAsHorizontalList()
         val settingsApp = appViews.getChildByText(
                 UiSelector()
                     .className(TextView::class.java.name), "Settings"

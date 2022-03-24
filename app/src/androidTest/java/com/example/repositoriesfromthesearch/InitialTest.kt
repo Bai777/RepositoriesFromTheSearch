@@ -13,9 +13,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 18)
 class InitialTest {
-    private val context = ApplicationProvider.getApplicationContext<Context>()
-
-    private val packageName = context.packageName
 
     @Test
     fun test_DeviceNotNull(){

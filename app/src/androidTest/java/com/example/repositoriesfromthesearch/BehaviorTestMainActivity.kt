@@ -18,16 +18,10 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 18)
 class BehaviorTestMainActivity {
-    private val uiDevice: UiDevice = UiDevice.getInstance(getInstrumentation())
-
-    private val context = ApplicationProvider.getApplicationContext<Context>()
-
-    private val packageName = context.packageName
 
     @Before
     fun setup() {
         uiDevice.pressHome()
-
         val intent = context.packageManager.getLaunchIntentForPackage(packageName)
         intent!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
@@ -60,7 +54,7 @@ class BehaviorTestMainActivity {
         toSearch.click()
         val changedText =
             uiDevice.wait(Until.findObject(By.res(packageName, "totalCountTextView")), TIMEOUT)
-        assertEquals(changedText.text, "Number of results: 2951")
+        assertEquals(changedText.text, "Number of results: 2957")
     }
 
     companion object {

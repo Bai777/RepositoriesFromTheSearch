@@ -18,11 +18,6 @@ import org.junit.runner.RunWith
 @SdkSuppress(minSdkVersion = 18)
 class BehaviorTestDetailsActivity {
 
-    private val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-
-    private val context = ApplicationProvider.getApplicationContext<Context>()
-
-    private val packageName = context.packageName
     @Before
     fun setup() {
         uiDevice.pressHome()

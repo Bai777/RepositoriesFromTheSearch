@@ -56,7 +56,7 @@ class DetailsActivityEspressoTest {
     // текстовое поле отображает ожидаемую информацию и видно на экране
     @Test
     fun activityTextView_HasText() {
-        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText("Number of results: 0")))
+        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(TEST_NUMBER_OF_RESULTS_ZERO)))
     }
 
     @Test
@@ -94,14 +94,14 @@ class DetailsActivityEspressoTest {
     @Test
     fun activityButtonIncrement_IsWorking() {
         onView(withId(R.id.incrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText("Number of results: 1")))
+        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(TEST_NUMBER_OF_RESULTS_PLUS_1)))
     }
 
     // проверим, как нажатие на кнопку (-) изменяет значение в TextView
     @Test
     fun activityButtonDecrement_IsWorking() {
         onView(withId(R.id.decrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText("Number of results: -1")))
+        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(TEST_NUMBER_OF_RESULTS_MINUS_1)))
     }
 
     // создаём статический метод getIntent().
@@ -121,10 +121,9 @@ class DetailsActivityEspressoTest {
 
     @Test
     fun activityCreateIntent_HasCount() {
-        val count = 42
-        val intent = DetailsActivity.getIntent(context, count)
+        val intent = DetailsActivity.getIntent(context, TEST_NUMBER)
         val bundle = intent.extras
-        TestCase.assertEquals(count, bundle?.getInt(DetailsActivity.TOTAL_COUNT_EXTRA, 0))
+        TestCase.assertEquals(TEST_NUMBER, bundle?.getInt(DetailsActivity.TOTAL_COUNT_EXTRA, 0))
     }
 
     @After
