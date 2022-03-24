@@ -51,37 +51,6 @@ class BehaviorTestMainActivity {
         assertEquals(changedText.text.toString(), "Number of results: 700")
     }
 
-    @Test
-    fun test_OpenDetailsScreen() {
-        val toDetails = uiDevice.findObject(By.res(packageName, "toDetailsActivityButton"))
-        toDetails.click()
-    }
-
-    @Test
-    fun test_IncrementButton() {
-        val toDetails = uiDevice.findObject(By.res(packageName, "toDetailsActivityButton"))
-        toDetails.click()
-        val changedText = uiDevice.wait(
-            Until.findObject(By.res(packageName, "totalCountTextViewDetails")),
-            TIMEOUT
-        )
-        val toIncrement = uiDevice.findObject(By.res(packageName, "incrementButton"))
-        toIncrement.click()
-        assertEquals(changedText.text, "Number of results: 1")
-    }
-
-    @Test
-    fun test_DecrementButton() {
-        val toDetails = uiDevice.findObject(By.res(packageName, "toDetailsActivityButton"))
-        toDetails.click()
-        val changedText = uiDevice.wait(
-            Until.findObject(By.res(packageName, "totalCountTextViewDetails")),
-            TIMEOUT
-        )
-        val toIncrement = uiDevice.findObject(By.res(packageName, "decrementButton"))
-        toIncrement.click()
-        assertEquals(changedText.text, "Number of results: -1")
-    }
 
     @Test
     fun test_ExamEqualsReturnResultDetailsScreen() {
@@ -95,6 +64,6 @@ class BehaviorTestMainActivity {
     }
 
     companion object {
-        private const val TIMEOUT = 5000L
+        const val TIMEOUT = 5000L
     }
 }
