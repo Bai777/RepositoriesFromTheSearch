@@ -103,4 +103,6 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.4.1-alpha05'
     //Fragment
     debugImplementation 'androidx.fragment:fragment-testing:1.4.1'
+    //RecyclerView
+    debugImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
 }
