@@ -1,11 +1,11 @@
-package com.example.repositoriesfromthesearch
+package com.example.repositoriesfromthesearch.automator
 
-import android.content.Context
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.UiDevice
+import com.example.repositoriesfromthesearch.context
+import com.example.repositoriesfromthesearch.packageName
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith

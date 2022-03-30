@@ -1,4 +1,4 @@
-package com.example.repositoriesfromthesearch
+package com.example.repositoriesfromthesearch.espresso
 
 import android.content.Context
 import android.os.Build
@@ -14,6 +14,8 @@ import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.repositoriesfromthesearch.BuildConfig
+import com.example.repositoriesfromthesearch.R
 import org.hamcrest.Matcher
 import org.junit.After
 import org.junit.Assert.*

@@ -1,4 +1,4 @@
-package com.example.repositoriesfromthesearch
+package com.example.repositoriesfromthesearch.espresso
 
 import android.content.Context
 import android.os.Build
@@ -10,7 +10,13 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.repositoriesfromthesearch.*
+import com.example.repositoriesfromthesearch.TEST_NUMBER
+import com.example.repositoriesfromthesearch.TEST_NUMBER_OF_RESULTS_MINUS_1
+import com.example.repositoriesfromthesearch.TEST_NUMBER_OF_RESULTS_PLUS_1
+import com.example.repositoriesfromthesearch.TEST_NUMBER_OF_RESULTS_ZERO
 import junit.framework.TestCase
+import kotlinx.android.synthetic.main.fragment_details.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -48,7 +54,7 @@ class DetailsActivityEspressoTest {
     @Test
     fun activityTextView_NotNull() {
         scenario.onActivity {
-            val totalCountTextView = it.binding.totalCountTextViewDetails
+            val totalCountTextView = it.totalCountTextViewDetails
             TestCase.assertNotNull(totalCountTextView)
         }
     }
@@ -56,7 +62,9 @@ class DetailsActivityEspressoTest {
     // текстовое поле отображает ожидаемую информацию и видно на экране
     @Test
     fun activityTextView_HasText() {
-        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(TEST_NUMBER_OF_RESULTS_ZERO)))
+        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(
+            TEST_NUMBER_OF_RESULTS_ZERO
+        )))
     }
 
     @Test
@@ -68,7 +76,7 @@ class DetailsActivityEspressoTest {
     @Test
     fun activityButtonDecrement_NotNull() {
         scenario.onActivity {
-            val decrementButton = it.binding.decrementButton
+            val decrementButton = it.decrementButton
             TestCase.assertNotNull(decrementButton)
         }
     }
@@ -77,7 +85,7 @@ class DetailsActivityEspressoTest {
     @Test
     fun activityButtonIncrement_NotNull() {
         scenario.onActivity {
-            val incrementButton = it.binding.incrementButton
+            val incrementButton = it.incrementButton
             TestCase.assertNotNull(incrementButton)
         }
     }
@@ -94,14 +102,18 @@ class DetailsActivityEspressoTest {
     @Test
     fun activityButtonIncrement_IsWorking() {
         onView(withId(R.id.incrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(TEST_NUMBER_OF_RESULTS_PLUS_1)))
+        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(
+            TEST_NUMBER_OF_RESULTS_PLUS_1
+        )))
     }
 
     // проверим, как нажатие на кнопку (-) изменяет значение в TextView
     @Test
     fun activityButtonDecrement_IsWorking() {
         onView(withId(R.id.decrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(TEST_NUMBER_OF_RESULTS_MINUS_1)))
+        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(
+            TEST_NUMBER_OF_RESULTS_MINUS_1
+        )))
     }
 
     // создаём статический метод getIntent().

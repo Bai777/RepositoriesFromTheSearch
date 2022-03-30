@@ -1,12 +1,11 @@
-package com.example.repositoriesfromthesearch
+package com.example.repositoriesfromthesearch.automator
 
 import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
-import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
+import com.example.repositoriesfromthesearch.uiDevice
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -1,4 +1,4 @@
-package com.example.repositoriesfromthesearch
+package com.example.repositoriesfromthesearch.espresso
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.FragmentScenario
@@ -10,6 +10,10 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.repositoriesfromthesearch.R
+import com.example.repositoriesfromthesearch.TEST_NUMBER_OF_RESULTS_MINUS_1
+import com.example.repositoriesfromthesearch.TEST_NUMBER_OF_RESULTS_PLUS_1
+import com.example.repositoriesfromthesearch.TEST_NUMBER_OF_RESULTS_TEN
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,13 +55,16 @@ class DetailsFragmentEspressoTest {
     @Test
     fun fragment_testIncrementButton(){
         onView(withId(R.id.incrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(TEST_NUMBER_OF_RESULTS_PLUS_1)))
+        onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(
+            TEST_NUMBER_OF_RESULTS_PLUS_1
+        )))
     }
 
     @Test
     fun fragment_testDecrementButton(){
         onView(withId(R.id.decrementButton)).perform(click())
         onView(withId(R.id.totalCountTextViewDetails)).check(matches(withText(
-            TEST_NUMBER_OF_RESULTS_MINUS_1)))
+            TEST_NUMBER_OF_RESULTS_MINUS_1
+        )))
     }
 }

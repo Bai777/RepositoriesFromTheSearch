@@ -3,8 +3,8 @@ package com.example.repositoriesfromthesearch
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
+
 
 //DetailsActivityEspressoTest variables
 internal const val TEST_NUMBER = 42
