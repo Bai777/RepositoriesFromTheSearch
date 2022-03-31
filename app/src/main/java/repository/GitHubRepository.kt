@@ -1,5 +1,9 @@
 package repository
 
+import io.reactivex.Observable
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import model.SearchResponse
 import presenter.IRepositoryContract
 import retrofit2.Call
@@ -28,5 +32,11 @@ internal class GitHubRepository(private val gitHubApi: GitHubApi) : IRepositoryC
                 callback.handleGitHubError()
             }
         })
+    }
+
+    override fun searchGithub(query: String): Observable<SearchResponse>{
+        return gitHubApi.searchGithubRx(query)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }

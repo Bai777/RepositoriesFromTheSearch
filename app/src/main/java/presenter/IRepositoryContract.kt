@@ -1,5 +1,7 @@
 package presenter
 
+import io.reactivex.Observable
+import model.SearchResponse
 import repository.RepositoryCallback
 
 internal interface IRepositoryContract {
@@ -7,4 +9,8 @@ internal interface IRepositoryContract {
         query: String,
         callback: RepositoryCallback
     )
+
+    fun searchGithub(
+        query: String,
+    ): Observable<SearchResponse>
 }

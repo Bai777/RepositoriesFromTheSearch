@@ -12,5 +12,4 @@ internal class SearchSchedulerProvider: SchedulerProvider {
     override fun io(): Scheduler {
         return Schedulers.io()
     }
-
 }
