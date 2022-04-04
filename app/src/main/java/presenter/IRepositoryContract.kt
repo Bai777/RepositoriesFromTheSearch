@@ -4,7 +4,7 @@ import io.reactivex.Observable
 import model.SearchResponse
 import repository.RepositoryCallback
 
-internal interface IRepositoryContract {
+interface IRepositoryContract {
     fun searchGithub(
         query: String,
         callback: RepositoryCallback
