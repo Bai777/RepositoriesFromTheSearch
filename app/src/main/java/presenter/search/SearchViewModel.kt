@@ -7,8 +7,6 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import kotlinx.coroutines.*
 import model.SearchResponse
 import presenter.IRepositoryContract
-import presenter.search.scheduler.SchedulerProvider
-import presenter.search.scheduler.SearchSchedulerProvider
 import repository.GitHubApi
 import repository.GitHubRepository
 import retrofit2.Retrofit
@@ -22,8 +20,7 @@ class SearchViewModel(
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build().create(GitHubApi::class.java)
-    ),
-    private val appSchedulerProvider: SchedulerProvider = SearchSchedulerProvider()
+    )
 ) : ViewModel() {
 
     private val _liveData = MutableLiveData<ScreenState>()
