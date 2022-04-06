@@ -1,4 +1,4 @@
-package com.example.repositoriesfromthesearch.unitTests.stub
+package presenter.stub
 
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers

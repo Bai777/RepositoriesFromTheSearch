@@ -1,6 +1,6 @@
 package com.example.repositoriesfromthesearch.unitTests
 
-import com.example.repositoriesfromthesearch.unitTests.stub.ScheduleProviderStub
+import presenter.stub.ScheduleProviderStub
 import io.reactivex.Observable
 import model.SearchResponse
 import org.junit.Before
