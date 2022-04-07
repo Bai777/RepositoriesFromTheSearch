@@ -1,0 +1,33 @@
+package com.example.repositoriesfromthesearch.automator
+
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SdkSuppress
+import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
+import androidx.test.uiautomator.UiDevice
+import com.example.repositoriesfromthesearch.context
+import com.example.repositoriesfromthesearch.packageName
+import org.junit.Assert.*
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+@SdkSuppress(minSdkVersion = 18)
+class InitialTest {
+
+    @Test
+    fun test_DeviceNotNull(){
+        val uiDevice: UiDevice = UiDevice.getInstance(getInstrumentation())
+        assertNotNull(uiDevice)
+    }
+
+    @Test
+    fun test_AppPackageNotNull(){
+        assertNotNull(packageName)
+    }
+
+    @Test
+    fun test_MainActivityIntentNotNull(){
+        val intent = context.packageManager.getLaunchIntentForPackage(packageName)
+        assertNotNull(intent)
+    }
+}
